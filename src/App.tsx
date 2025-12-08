@@ -1,78 +1,32 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+
+// Public
 import Home from './pages/Home';
-import Dashboard from './pages/admin/Dashboard';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import VerifyForgotPassword from './pages/auth/VerifyForgotPassword';
+import NotFound from './pages/NotFound';
+
+// Admin Pages
+import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/management/Users';
 import Mechanics from './pages/management/Mechanics';
 import Workshops from './pages/management/Workshops';
-import NotFound from './pages/NotFound';
+import Cars from './pages/vehicles/Cars';
+import Brands from './pages/vehicles/Brands';
+import Models from './pages/vehicles/Models';
+import BodyTypes from './pages/vehicles/BodyTypes';
+import ServicesList from './pages/services/ServicesList';
+import Subscriptions from './pages/services/Subscriptions';
+import Plans from './pages/services/Plans';
+import Settings from './pages/system/Settings';
+import Notifications from './pages/system/Notifications';
+import Maintenance from './pages/system/Maintenance';
+
+// Components
 import { ProtectedRoute, ScrollToTop } from './components';
 import { AdminLayout } from './components/Admin';
-
-const AppRoutes = () => {
-  return (
-    <Routes>
-      {/* Auth Routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route
-        path="/verify-forgot-password"
-        element={<VerifyForgotPassword />}
-      />
-
-      {/* Protected Routes with Layout */}
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <AdminLayout>
-              <Dashboard />
-            </AdminLayout>
-          </ProtectedRoute>
-        }
-      />
-
-      {/* Management Routes */}
-      <Route
-        path="/management/users"
-        element={
-          <ProtectedRoute>
-            <AdminLayout>
-              <Users />
-            </AdminLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/management/mechanics"
-        element={
-          <ProtectedRoute>
-            <AdminLayout>
-              <Mechanics />
-            </AdminLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/management/workshops"
-        element={
-          <ProtectedRoute>
-            <AdminLayout>
-              <Workshops />
-            </AdminLayout>
-          </ProtectedRoute>
-        }
-      />
-
-      {/* 404 - Catch all unmatched routes */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
-};
 
 function App() {
   const location = useLocation();
@@ -84,7 +38,53 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <AppRoutes />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/verify-forgot-password"
+          element={<VerifyForgotPassword />}
+        />
+
+        {/* ALL Protected Admin Routes — ONE wrapper */}
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          {/* Admin Dashboard & Pages */}
+          <Route path="dashboard" element={<Dashboard />} />
+
+          {/* Management */}
+          <Route path="management/users" element={<Users />} />
+          <Route path="management/mechanics" element={<Mechanics />} />
+          <Route path="management/workshops" element={<Workshops />} />
+
+          {/* Vehicles */}
+          <Route path="vehicles/cars" element={<Cars />} />
+          <Route path="vehicles/brands" element={<Brands />} />
+          <Route path="vehicles/models" element={<Models />} />
+          <Route path="vehicles/body-types" element={<BodyTypes />} />
+
+          {/* Services */}
+          <Route path="services/list" element={<ServicesList />} />
+          <Route path="services/subscriptions" element={<Subscriptions />} />
+          <Route path="services/plans" element={<Plans />} />
+
+          {/* System */}
+          <Route path="system/settings" element={<Settings />} />
+          <Route path="system/notifications" element={<Notifications />} />
+          <Route path="system/maintenance" element={<Maintenance />} />
+        </Route>
+
+        {/* 404 - Must be last */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
