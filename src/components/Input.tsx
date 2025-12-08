@@ -32,16 +32,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={`space-y-1.5 ${fullWidth ? 'w-full' : ''}`}>
-        {/* Label */}
         {label && (
           <label className="block text-sm font-medium text-(--color-text)">
             {label}
           </label>
         )}
 
-        {/* Input Container */}
         <div className="relative">
-          {/* Left Icon */}
+          {/* Left Icon - Non-interactive */}
           {hasLeftIcon && (
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
               <span
@@ -52,7 +50,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
 
-          {/* Native Input */}
+          {/* Input */}
           <input
             ref={ref}
             type={type}
@@ -64,7 +62,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               focus:ring-4 focus:ring-(--color-primary)/20
               disabled:bg-(--color-elevation-1) disabled:cursor-not-allowed
               ${hasLeftIcon ? 'pl-12' : 'pl-4'}
-              ${hasRightIcon ? 'pr-12' : 'pr-4'}
+              ${hasRightIcon ? 'pr-14' : 'pr-4'}  {/* Extra space for clickable icon */}
               ${
                 error
                   ? 'border-(--color-error) focus:border-(--color-error)'
@@ -75,19 +73,30 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
 
-          {/* Right Icon */}
+          {/* Right Icon - Interactive! */}
           {hasRightIcon && (
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
-              <span
-                className={`text-(--color-body) ${disabled ? 'opacity-50' : ''}`}
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+              <button
+                type="button"
+                className="p-1 rounded-lg hover:bg-elevation-2 transition-colors focus:outline-none"
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Trigger click on the actual button inside rightIcon
+                  const button = e.currentTarget.querySelector('button');
+                  button?.click();
+                }}
               >
-                {rightIcon}
-              </span>
+                <span
+                  className={`text-(--color-body) ${disabled ? 'opacity-50' : ''}`}
+                >
+                  {rightIcon}
+                </span>
+              </button>
             </div>
           )}
         </div>
 
-        {/* Helper / Error Text */}
+        {/* Helper / Error */}
         {(helperText || errorMessage) && (
           <p
             className={`text-sm ${error ? 'text-(--color-error)' : 'text-(--color-body)'}`}
