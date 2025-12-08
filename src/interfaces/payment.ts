@@ -1,5 +1,5 @@
 import type { BaseResponse, PaginatedData } from './base';
-import type { CarOwner } from './cars';
+import { User } from './users';
 
 export interface MinimalSubscription {
   id: string;
@@ -19,7 +19,7 @@ export interface Payment {
   paid_at: string | null;
   refunded_at: string | null;
   created_at: string;
-  user: CarOwner;
+  user: User;
   subscription: MinimalSubscription | null;
 }
 

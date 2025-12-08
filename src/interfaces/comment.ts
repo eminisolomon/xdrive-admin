@@ -1,5 +1,6 @@
 import type { BaseResponse, PaginatedData } from './base';
-import type { CarOwner, Car } from './cars';
+import type { Car } from './cars';
+import { User } from './users';
 
 export interface Comment {
   id: string;
@@ -11,7 +12,7 @@ export interface Comment {
   flagged_at: string | null;
   created_at: string;
   updated_at: string;
-  user: CarOwner;
+  user: User;
   car: Car;
   likes_count: number;
   is_liked: boolean;

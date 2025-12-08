@@ -1,5 +1,5 @@
 import type { BaseResponse, PaginatedData } from './base';
-import type { CarOwner } from './cars';
+import { User } from './users';
 
 export interface WorkshopServiceItem {
   id: string;
@@ -30,7 +30,7 @@ export interface Workshop {
   is_active: boolean;
   created_at: string;
   updated_at: string;
-  user: CarOwner;
+  user: User;
   services: WorkshopServiceItem[];
 }
 

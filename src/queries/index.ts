@@ -15,3 +15,4 @@ export * from './useMaintenance';
 export * from './usePayments';
 export * from './useSubscriptions';
 export * from './useNotifications';
+export * from './useUsers';

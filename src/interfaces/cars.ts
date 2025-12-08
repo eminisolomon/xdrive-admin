@@ -2,23 +2,7 @@ import type { BaseResponse, PaginatedData } from './base';
 import type { Brand } from './brand';
 import type { CarModel } from './car-model';
 import type { BodyType } from './body-type';
-
-export interface CarOwner {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone_number: string;
-  country: string;
-  town_city: string;
-  state: string;
-  address: string;
-  profile_image: string | null;
-  role: string;
-  email_verified_at: string;
-  created_at: string;
-  updated_at: string;
-}
+import { User } from './users';
 
 export interface CarImage {
   id: string;
@@ -71,7 +55,7 @@ export interface Car {
   updated_at: string;
 
   // Relations
-  user?: CarOwner;
+  user?: User;
   brand?: Brand;
   car_model?: CarModel;
   body_type?: BodyType;

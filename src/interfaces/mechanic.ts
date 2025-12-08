@@ -1,5 +1,5 @@
 import type { BaseResponse, PaginatedData } from './base';
-import type { CarOwner } from './cars';
+import { User } from './users';
 
 export interface MechanicServiceItem {
   id: string;
@@ -18,7 +18,7 @@ export interface Mechanic {
   years_of_experience: number;
   self_description: string;
   available_days: string[];
-  images: string[] | null; // API shows null in example, assuming array of strings or objects if populated? Let's assume basic structure for now or string[]
+  images: string[] | null;
   average_rating: number;
   total_reviews: number;
   address: string;
@@ -29,7 +29,7 @@ export interface Mechanic {
   is_active: boolean;
   created_at: string;
   updated_at: string;
-  user: CarOwner;
+  user: User;
   services: MechanicServiceItem[];
 }
 

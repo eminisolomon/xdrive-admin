@@ -15,3 +15,4 @@ export * from './maintenance.service';
 export * from './payment.service';
 export * from './subscription.service';
 export * from './notification.service';
+export * from './user.service';

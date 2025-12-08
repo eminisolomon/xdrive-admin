@@ -1,11 +1,11 @@
 import type { BaseResponse, PaginatedData } from './base';
-import type { CarOwner } from './cars';
+import { User } from './users';
 
 export interface Reviewable {
   id: string;
-  type: string; // 'workshop' | 'mechanic' or others
+  type: string; // 'workshop' | 'mechanic'
   name: string | null;
-  [key: string]: any; // Allow other properties like address, years_of_experience, etc.
+  [key: string]: any;
 }
 
 export interface Review {
@@ -15,7 +15,7 @@ export interface Review {
   flagged: number;
   flagged_at: string | null;
   created_at: string;
-  user: CarOwner;
+  user: User;
   reviewable: Reviewable;
 }
 

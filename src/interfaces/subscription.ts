@@ -1,6 +1,6 @@
 import type { BaseResponse, PaginatedData } from './base';
-import type { CarOwner } from './cars';
 import type { Payment } from './payment';
+import { User } from './users';
 
 export interface SubscriptionPlan {
   id: string;
@@ -37,7 +37,7 @@ export interface Subscription {
   is_expired: boolean;
   is_on_trial: boolean;
   days_until_expiry: number;
-  user: CarOwner;
+  user: User;
   plan: SubscriptionPlan;
   payments?: Payment[];
 }
