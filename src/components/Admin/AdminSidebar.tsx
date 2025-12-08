@@ -3,12 +3,16 @@ import {
   ChartBarIcon,
   UserGroupIcon,
   TruckIcon,
-  WrenchScrewdriverIcon,
-  BuildingStorefrontIcon,
   ReceiptPercentIcon,
   Cog6ToothIcon,
   ChevronUpIcon,
   ChevronDownIcon,
+  UsersIcon,
+  WrenchIcon,
+  HomeModernIcon,
+  CurrencyDollarIcon,
+  BellIcon,
+  ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -24,17 +28,17 @@ const SIDEBAR_ITEMS = [
     children: [
       {
         label: 'Users',
-        icon: <UserGroupIcon className="h-5 w-5" />,
+        icon: <UsersIcon className="h-5 w-5" />,
         path: '/management/users',
       },
       {
         label: 'Mechanics',
-        icon: <WrenchScrewdriverIcon className="h-5 w-5" />,
+        icon: <WrenchIcon className="h-5 w-5" />,
         path: '/management/mechanics',
       },
       {
         label: 'Workshops',
-        icon: <BuildingStorefrontIcon className="h-5 w-5" />,
+        icon: <HomeModernIcon className="h-5 w-5" />,
         path: '/management/workshops',
       },
     ],
@@ -76,12 +80,12 @@ const SIDEBAR_ITEMS = [
       },
       {
         label: 'Subscriptions',
-        icon: <ReceiptPercentIcon className="h-5 w-5" />,
+        icon: <CurrencyDollarIcon className="h-5 w-5" />,
         path: '/services/subscriptions',
       },
       {
         label: 'Plans',
-        icon: <ReceiptPercentIcon className="h-5 w-5" />,
+        icon: <CurrencyDollarIcon className="h-5 w-5" />,
         path: '/services/plans',
       },
     ],
@@ -97,12 +101,12 @@ const SIDEBAR_ITEMS = [
       },
       {
         label: 'Notifications',
-        icon: <Cog6ToothIcon className="h-5 w-5" />,
+        icon: <BellIcon className="h-5 w-5" />,
         path: '/system/notifications',
       },
       {
         label: 'Maintenance',
-        icon: <Cog6ToothIcon className="h-5 w-5" />,
+        icon: <ShieldCheckIcon className="h-5 w-5" />,
         path: '/system/maintenance',
       },
     ],
@@ -117,6 +121,7 @@ interface AdminSidebarProps {
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ open, onClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const currentYear = new Date().getFullYear();
   const [expanded, setExpanded] = useState<string[]>([]);
 
   useEffect(() => {
@@ -208,7 +213,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open, onClose }) => {
 
           <div className="p-4 border-t border-(--color-border) bg-(--color-elevation-1) text-center text-xs text-(--color-inactive)">
             <p>Xdrive Admin v1.0</p>
-            <p className="mt-1">© 2025 Xdrive Automobile</p>
+            <p className="mt-1">© {currentYear} Xdrive Automobile</p>
           </div>
         </nav>
       </aside>
@@ -266,7 +271,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open, onClose }) => {
 
             <div className="p-4 border-t border-(--color-border) bg-(--color-elevation-1) text-center text-xs text-(--color-inactive)">
               <p>Xdrive Admin v1.0</p>
-              <p className="mt-1">© 2025 Xdrive Automobile</p>
+              <p className="mt-1">© {currentYear} Xdrive Automobile</p>
             </div>
           </nav>
         </aside>

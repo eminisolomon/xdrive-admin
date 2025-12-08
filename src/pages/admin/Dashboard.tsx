@@ -1,14 +1,11 @@
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import { ChartBarIcon } from '@heroicons/react/24/outline';
 
 const Dashboard = () => {
   return (
     <div className="min-h-screen bg-(--color-background)">
-      {/* Header */}
       <div className="mb-12 pt-8">
         <h1 className="text-4xl md:text-5xl font-extrabold text-(--color-text) flex items-center gap-4 mb-3">
-          <DashboardIcon
-            sx={{ fontSize: '2.75rem', color: 'var(--color-primary)' }}
-          />
+          <ChartBarIcon className="h-12 w-12 text-(--color-primary)" />
           Dashboard
         </h1>
         <p className="text-lg text-(--color-body)">
@@ -16,7 +13,6 @@ const Dashboard = () => {
         </p>
       </div>
 
-      {/* Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mb-16">
         {[1, 2, 3, 4].map((i) => (
           <div
@@ -33,7 +29,6 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Empty State */}
       <div className="mb-20">
         <div className="bg-(--color-surface) border border-dashed border-(--color-primary)/30 rounded-3xl p-16 text-center shadow-inner">
           <h2 className="text-2xl font-bold text-(--color-text) mb-4">

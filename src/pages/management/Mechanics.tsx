@@ -1,48 +1,27 @@
-import { Box, Typography, Container } from '@mui/material';
-import BuildIcon from '@mui/icons-material/Build';
+import { WrenchScrewdriverIcon } from '@heroicons/react/24/outline';
 
 const Mechanics = () => {
   return (
-    <Container maxWidth="xl">
-      <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 700,
-            color: '#fff',
-            mb: 1,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 2,
-          }}
-        >
-          <BuildIcon sx={{ fontSize: '2rem', color: '#3b82f6' }} />
+    <div>
+      <div className="mb-12 pt-8">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-(--color-text) flex items-center gap-4 mb-3">
+          <WrenchScrewdriverIcon className="h-12 w-12 text-(--color-primary)" />
           Mechanics Management
-        </Typography>
-        <Typography variant="body2" sx={{ color: '#9ca3af' }}>
+        </h1>
+        <p className="text-lg text-(--color-body)">
           Manage mechanics and their profiles.
-        </Typography>
-      </Box>
+        </p>
+      </div>
 
-      {/* Coming Soon */}
-      <Box
-        sx={{
-          p: 4,
-          backgroundColor: '#1a1a1a',
-          backgroundImage: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
-          border: '1px dashed rgba(59, 130, 246, 0.3)',
-          borderRadius: '0.75rem',
-          textAlign: 'center',
-        }}
-      >
-        <Typography variant="h6" sx={{ color: '#9ca3af', mb: 1 }}>
+      <div className="bg-(--color-surface) border border-dashed border-(--color-primary)/30 rounded-3xl p-16 text-center shadow-inner">
+        <h2 className="text-2xl font-bold text-(--color-text) mb-4">
           Coming Soon
-        </Typography>
-        <Typography variant="body2" sx={{ color: '#6b7280' }}>
+        </h2>
+        <p className="text-(--color-body) max-w-md mx-auto leading-relaxed">
           Mechanics management interface is under development.
-        </Typography>
-      </Box>
-    </Container>
+        </p>
+      </div>
+    </div>
   );
 };
 
