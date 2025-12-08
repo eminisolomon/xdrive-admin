@@ -3,6 +3,3 @@ export { default as Input } from './Input';
 export { default as Loading } from './Loading';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as ProtectedRoute } from './ProtectedRoute';
-export { default as AdminLayout } from './AdminLayout';
-export { default as AdminHeader } from './AdminHeader';
-export { default as AdminSidebar } from './AdminSidebar';

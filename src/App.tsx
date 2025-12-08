@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import Dashboard from './pages/Admin/Dashboard';
-import ForgotPassword from './pages/Auth/ForgotPassword';
-import ResetPassword from './pages/Auth/ResetPassword';
-import VerifyForgotPassword from './pages/Auth/VerifyForgotPassword';
-import Users from './pages/Management/Users';
-import Mechanics from './pages/Management/Mechanics';
-import Workshops from './pages/Management/Workshops';
+import Dashboard from './pages/admin/Dashboard';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
+import VerifyForgotPassword from './pages/auth/VerifyForgotPassword';
+import Users from './pages/management/Users';
+import Mechanics from './pages/management/Mechanics';
+import Workshops from './pages/management/Workshops';
 import NotFound from './pages/NotFound';
-import { ProtectedRoute, AdminLayout, ScrollToTop } from './components';
+import { ProtectedRoute, ScrollToTop } from './components';
+import { AdminLayout } from './components/Admin';
 
 const AppRoutes = () => {
   return (
