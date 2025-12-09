@@ -49,7 +49,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#0A2647]/95 backdrop-blur-md shadow-md py-4'
+          ? 'bg-(--color-primary)/95 backdrop-blur-md shadow-md py-4'
           : 'bg-transparent py-6'
       }`}
     >

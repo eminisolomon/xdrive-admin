@@ -5,11 +5,11 @@ import MockupImg from '../../assets/mockup.png';
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0A2647] text-white pt-32 pb-20 lg:pt-48 lg:pb-32">
+    <section className="relative overflow-hidden bg-(--color-primary) text-white pt-32 pb-20 lg:pt-48 lg:pb-32">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-20 pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-500 blur-3xl"></div>
-        <div className="absolute top-1/2 right-0 w-64 h-64 rounded-full bg-indigo-500 blur-3xl"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-(--color-primary-container) blur-3xl"></div>
+        <div className="absolute top-1/2 right-0 w-64 h-64 rounded-full bg-white blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -17,9 +17,11 @@ const Hero = () => {
           <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
               Experience 24/7 <br />
-              <span className="text-blue-400">Automobile Services</span>
+              <span className="text-(--color-primary-container)">
+                Automobile Services
+              </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Fast, Secure, and Reliable solutions for car sales, rentals,
               upgrades, swaps, and mobile mechanics. All in one place.
             </p>
@@ -52,8 +54,8 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="pt-4 flex items-center justify-center lg:justify-start gap-2 text-sm text-gray-400 font-medium cursor-pointer hover:text-white transition-colors">
-              <span className="underline decoration-blue-400 underline-offset-4">
+            <div className="pt-4 flex items-center justify-center lg:justify-start gap-2 text-sm text-(--color-primary-container) font-medium cursor-pointer hover:text-white transition-colors">
+              <span className="underline decoration-(--color-primary-container) underline-offset-4">
                 Learn more about our services
               </span>
               <ArrowRightIcon className="h-4 w-4" />
