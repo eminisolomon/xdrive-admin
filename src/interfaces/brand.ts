@@ -1,6 +1,5 @@
 import type { BaseResponse, PaginatedData } from './base';
 import { CarModel } from './car-model';
-import { Car } from './cars';
 
 export interface Brand {
   id: string;
@@ -10,7 +9,6 @@ export interface Brand {
   created_at: string;
   updated_at: string;
   car_models?: CarModel[];
-  cars?: Car[];
 }
 
 // Request types

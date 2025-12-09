@@ -1,4 +1,5 @@
 export { default as Input } from './Input';
+export { default as Pagination } from './Pagination';
 export { default as Button } from './Button';
 export * from './Modal';
 export { default as Loading } from './Loading';
@@ -7,3 +8,4 @@ export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as PageHeader } from './PageHeader';
 export * from './Admin';
 export * from './Plan';
+export * from './Brand';

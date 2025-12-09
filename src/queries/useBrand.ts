@@ -9,12 +9,12 @@ import type {
 } from '@/interfaces';
 import { brandService } from '@/services';
 
-export const useBrand = (brandId?: string | null) => {
+export const useBrand = (brandId?: string | null, page = 1) => {
   const queryClient = useQueryClient();
 
   const allBrandsQuery = useQuery({
-    queryKey: ['brands'],
-    queryFn: () => brandService.getAll(),
+    queryKey: ['brands', page],
+    queryFn: () => brandService.getAll(page),
   });
 
   const brandByIdQuery = useQuery({

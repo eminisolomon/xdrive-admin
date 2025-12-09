@@ -11,10 +11,11 @@ import {
 } from '@/interfaces';
 
 export const brandService = {
-  // Brand operations
-  getAll: async (): Promise<GetBrandsResponse> => {
+  getAll: async (page = 1): Promise<GetBrandsResponse> => {
     try {
-      const response = await api.get<GetBrandsResponse>('/admin/brands');
+      const response = await api.get<GetBrandsResponse>(
+        `/admin/brands?page=${page}`,
+      );
       return response.data;
     } catch (error) {
       throw handleApiError(error);
