@@ -7,8 +7,12 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import { useServices } from '@/queries/useServices';
-import { Button, Loading, Modal } from '@/components';
-import { ServiceModal } from '@/components/Service';
+import { Button, Loading } from '@/components';
+import {
+  ServiceModal,
+  DeleteServiceModal,
+  ToggleServiceStatusModal,
+} from '@/components/Service';
 import {
   Service,
   CreateServiceRequest,
@@ -26,7 +30,6 @@ const ServicesList = () => {
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Delete confirmation state
   const [deleteConfirmation, setDeleteConfirmation] = useState<{
     isOpen: boolean;
     serviceId: string | null;
@@ -35,7 +38,6 @@ const ServicesList = () => {
     serviceId: null,
   });
 
-  // Toggle Active confirmation state
   const [toggleConfirmation, setToggleConfirmation] = useState<{
     isOpen: boolean;
     service: Service | null;
@@ -222,81 +224,20 @@ const ServicesList = () => {
         isLoading={isSubmitting}
       />
 
-      {/* Delete Confirmation Modal */}
-      <Modal
+      <DeleteServiceModal
         isOpen={deleteConfirmation.isOpen}
         onClose={() =>
           setDeleteConfirmation({ isOpen: false, serviceId: null })
         }
-        title="Delete Service"
-      >
-        <div className="space-y-4">
-          <p className="text-(--color-body)">
-            Are you sure you want to delete this service? This action cannot be
-            undone.
-          </p>
-          <div className="flex justify-end gap-3">
-            <Button
-              variant="outline"
-              onClick={() =>
-                setDeleteConfirmation({ isOpen: false, serviceId: null })
-              }
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleDelete}
-              className="bg-red-600 hover:bg-red-700 text-white"
-            >
-              Delete
-            </Button>
-          </div>
-        </div>
-      </Modal>
+        onConfirm={handleDelete}
+      />
 
-      {/* Toggle Status Confirmation Modal */}
-      <Modal
+      <ToggleServiceStatusModal
         isOpen={toggleConfirmation.isOpen}
         onClose={() => setToggleConfirmation({ isOpen: false, service: null })}
-        title={
-          toggleConfirmation.service?.is_active
-            ? 'Deactivate Service'
-            : 'Activate Service'
-        }
-      >
-        <div className="space-y-4">
-          <p className="text-(--color-body)">
-            Are you sure you want to{' '}
-            {toggleConfirmation.service?.is_active ? 'deactivate' : 'activate'}{' '}
-            <b>{toggleConfirmation.service?.name}</b>?
-            {toggleConfirmation.service?.is_active
-              ? ' It will be hidden from users.'
-              : ' It will become visible to users.'}
-          </p>
-          <div className="flex justify-end gap-3">
-            <Button
-              variant="outline"
-              onClick={() =>
-                setToggleConfirmation({ isOpen: false, service: null })
-              }
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={confirmToggleActive}
-              className={
-                toggleConfirmation.service?.is_active
-                  ? 'bg-amber-600 hover:bg-amber-700 text-white'
-                  : 'bg-emerald-600 hover:bg-emerald-700 text-white'
-              }
-            >
-              {toggleConfirmation.service?.is_active
-                ? 'Deactivate'
-                : 'Activate'}
-            </Button>
-          </div>
-        </div>
-      </Modal>
+        onConfirm={confirmToggleActive}
+        service={toggleConfirmation.service}
+      />
     </div>
   );
 };

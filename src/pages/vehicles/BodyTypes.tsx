@@ -7,8 +7,8 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import { useBodyType } from '@/queries/useBodyType';
-import { Button, Loading, Modal } from '@/components';
-import { BodyTypeModal } from '@/components/BodyType';
+import { Button, Loading } from '@/components';
+import { BodyTypeModal, DeleteBodyTypeModal } from '@/components/BodyType';
 import {
   BodyType,
   CreateBodyTypeRequest,
@@ -196,37 +196,13 @@ const BodyTypes = () => {
         isLoading={isSubmitting}
       />
 
-      {/* Delete Confirmation Modal */}
-      <Modal
+      <DeleteBodyTypeModal
         isOpen={deleteConfirmation.isOpen}
         onClose={() =>
           setDeleteConfirmation({ isOpen: false, bodyTypeId: null })
         }
-        title="Delete Body Type"
-      >
-        <div className="space-y-4">
-          <p className="text-(--color-body)">
-            Are you sure you want to delete this body type? This action cannot
-            be undone.
-          </p>
-          <div className="flex justify-end gap-3">
-            <Button
-              variant="outline"
-              onClick={() =>
-                setDeleteConfirmation({ isOpen: false, bodyTypeId: null })
-              }
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleDelete}
-              className="bg-red-600 hover:bg-red-700 text-white"
-            >
-              Delete
-            </Button>
-          </div>
-        </div>
-      </Modal>
+        onConfirm={handleDelete}
+      />
     </div>
   );
 };

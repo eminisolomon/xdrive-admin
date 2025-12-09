@@ -9,7 +9,11 @@ import {
 } from '@heroicons/react/24/outline';
 import { usePlan } from '@/queries/usePlan';
 import { Button, Loading } from '@/components';
-import { PlanModal, PlanFeaturesModal } from '@/components/Plan';
+import {
+  PlanModal,
+  PlanFeaturesModal,
+  DeletePlanModal,
+} from '@/components/Plan';
 import { Plan, CreatePlanRequest } from '@/interfaces/plan';
 import { formatCurrency } from '@/shared/formatters';
 import { toast } from 'sonner';
@@ -26,10 +30,17 @@ const Plans = () => {
   const [editingPlan, setEditingPlan] = useState<Plan | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Feature modal state
   const [isFeatureModalOpen, setIsFeatureModalOpen] = useState(false);
   const [selectedPlanForFeatures, setSelectedPlanForFeatures] =
     useState<Plan | null>(null);
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState<{
+    isOpen: boolean;
+    planId: string | null;
+  }>({
+    isOpen: false,
+    planId: null,
+  });
 
   const handleCreate = () => {
     setEditingPlan(null);
@@ -46,13 +57,18 @@ const Plans = () => {
     setIsFeatureModalOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this plan?')) {
-      try {
-        await deletePlan(id);
-      } catch (error) {
-        console.error('Failed to delete plan', error);
-      }
+  const handleDelete = (id: string) => {
+    setDeleteConfirmation({ isOpen: true, planId: id });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteConfirmation.planId) return;
+
+    try {
+      await deletePlan(deleteConfirmation.planId);
+      setDeleteConfirmation({ isOpen: false, planId: null });
+    } catch (error) {
+      console.error('Failed to delete plan', error);
     }
   };
 
@@ -221,6 +237,12 @@ const Plans = () => {
         isOpen={isFeatureModalOpen}
         onClose={() => setIsFeatureModalOpen(false)}
         plan={selectedPlanForFeatures}
+      />
+
+      <DeletePlanModal
+        isOpen={deleteConfirmation.isOpen}
+        onClose={() => setDeleteConfirmation({ isOpen: false, planId: null })}
+        onConfirm={confirmDelete}
       />
     </div>
   );

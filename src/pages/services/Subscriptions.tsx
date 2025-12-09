@@ -7,8 +7,11 @@ import {
   XCircleIcon,
 } from '@heroicons/react/24/outline';
 import { useSubscriptions } from '@/queries/useSubscriptions';
-import { Button, Loading, Pagination, Modal } from '@/components';
-import { ExtendSubscriptionModal } from '@/components/Subscription';
+import { Button, Loading, Pagination } from '@/components';
+import {
+  ExtendSubscriptionModal,
+  CancelSubscriptionModal,
+} from '@/components/Subscription';
 import {
   Subscription,
   ExtendSubscriptionRequest,
@@ -223,37 +226,13 @@ const Subscriptions = () => {
         isLoading={isSubmitting}
       />
 
-      {/* Cancel Confirmation Modal */}
-      <Modal
+      <CancelSubscriptionModal
         isOpen={cancelConfirmation.isOpen}
         onClose={() =>
           setCancelConfirmation({ isOpen: false, subscriptionId: null })
         }
-        title="Cancel Subscription"
-      >
-        <div className="space-y-4">
-          <p className="text-(--color-body)">
-            Are you sure you want to cancel this subscription? The user will
-            lose access at the end of the current period.
-          </p>
-          <div className="flex justify-end gap-3">
-            <Button
-              variant="outline"
-              onClick={() =>
-                setCancelConfirmation({ isOpen: false, subscriptionId: null })
-              }
-            >
-              Keep it
-            </Button>
-            <Button
-              onClick={handleCancel}
-              className="bg-red-600 hover:bg-red-700 text-white"
-            >
-              Cancel Subscription
-            </Button>
-          </div>
-        </div>
-      </Modal>
+        onConfirm={handleCancel}
+      />
     </div>
   );
 };
