@@ -4,6 +4,7 @@ export { default as Button } from './Button';
 export * from './Modal';
 export { default as Loading } from './Loading';
 export { default as ScrollToTop } from './ScrollToTop';
+export { default as SearchableSelect } from './SearchableSelect';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as PageHeader } from './PageHeader';
 export * from './Admin';

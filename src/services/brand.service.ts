@@ -11,10 +11,14 @@ import {
 } from '@/interfaces';
 
 export const brandService = {
-  getAll: async (page = 1): Promise<GetBrandsResponse> => {
+  getAll: async (page = 1, search?: string): Promise<GetBrandsResponse> => {
     try {
+      const queryParams = new URLSearchParams({ page: page.toString() });
+      if (search) {
+        queryParams.append('search', search);
+      }
       const response = await api.get<GetBrandsResponse>(
-        `/admin/brands?page=${page}`,
+        `/admin/brands?${queryParams.toString()}`,
       );
       return response.data;
     } catch (error) {
