@@ -10,6 +10,20 @@ import {
 
 export const carModelService = {
   // Car Model operations
+  getAll: async (
+    page: number = 1,
+    search: string = '',
+  ): Promise<GetCarModelsResponse> => {
+    try {
+      const response = await api.get<GetCarModelsResponse>('/admin/models', {
+        params: { page, search },
+      });
+      return response.data;
+    } catch (error) {
+      throw handleApiError(error);
+    }
+  },
+
   getByBrand: async (brandId: string): Promise<GetCarModelsResponse> => {
     try {
       const response = await api.get<GetCarModelsResponse>(

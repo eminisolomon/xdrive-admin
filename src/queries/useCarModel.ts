@@ -12,9 +12,16 @@ export const useCarModel = () => {
   // Queries
   const useGetCarModels = (brandId: string) => {
     return useQuery({
-      queryKey: ['car-models', brandId],
+      queryKey: ['car-models', 'brand', brandId],
       queryFn: () => carModelService.getByBrand(brandId),
       enabled: !!brandId,
+    });
+  };
+
+  const useGetAllCarModels = (page: number = 1, search: string = '') => {
+    return useQuery({
+      queryKey: ['car-models', 'all', page, search],
+      queryFn: () => carModelService.getAll(page, search),
     });
   };
 
@@ -28,7 +35,7 @@ export const useCarModel = () => {
       data: CreateCarModelRequest;
     }) => carModelService.create(brandId, data),
     onSuccess: (_, variables) => {
-      toast.success('Car model created successfully');
+      toast.success('Car model created');
       queryClient.invalidateQueries({
         queryKey: ['car-models', variables.brandId],
       });
@@ -43,8 +50,6 @@ export const useCarModel = () => {
       carModelService.update(id, data),
     onSuccess: () => {
       toast.success('Car model updated successfully');
-      // We need to invalidate the specific list, but we might not have brandId here easily unless we pass it or invalidate all models
-      // Invalidating all car-models queries is safer
       queryClient.invalidateQueries({ queryKey: ['car-models'] });
     },
     onError: (error: any) => {
@@ -65,14 +70,18 @@ export const useCarModel = () => {
 
   return {
     useGetCarModels,
+    useGetAllCarModels,
+
     createCarModel: createCarModelMutation.mutateAsync,
     createCarModelStatus: createCarModelMutation.status,
     createCarModelError: createCarModelMutation.error,
     createCarModelPending: createCarModelMutation.isPending,
+
     updateCarModel: updateCarModelMutation.mutateAsync,
     updateCarModelStatus: updateCarModelMutation.status,
     updateCarModelError: updateCarModelMutation.error,
     updateCarModelPending: updateCarModelMutation.isPending,
+
     deleteCarModel: deleteCarModelMutation.mutateAsync,
     deleteCarModelStatus: deleteCarModelMutation.status,
     deleteCarModelError: deleteCarModelMutation.error,

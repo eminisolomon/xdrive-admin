@@ -1,4 +1,5 @@
 import type { BaseResponse, PaginatedData } from './base';
+import { Brand } from './brand';
 
 export interface CarModel {
   id: string;
@@ -7,6 +8,8 @@ export interface CarModel {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  cars_count: number;
+  brand?: Brand;
 }
 
 // Request types
