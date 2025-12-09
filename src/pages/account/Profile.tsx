@@ -60,7 +60,7 @@ const Profile = () => {
     `${admin?.first_name || ''} ${admin?.last_name || ''}`.trim() || 'Admin';
 
   return (
-    <div className="p-6">
+    <div>
       <PageHeader
         title="Profile Settings"
         description="View and manage your account information."

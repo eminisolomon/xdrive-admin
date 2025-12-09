@@ -28,7 +28,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       <PageHeader
         title="Change Password"
         description="Update your password to keep your account secure."
