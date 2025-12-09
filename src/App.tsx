@@ -24,6 +24,16 @@ import Settings from './pages/system/Settings';
 import Notifications from './pages/system/Notifications';
 import Maintenance from './pages/system/Maintenance';
 
+// Finance
+import Payments from './pages/finance/Payments';
+
+// Reports
+import Reports from './pages/reports/Reports';
+
+// Feedback
+import Reviews from './pages/feedback/Reviews';
+import Comments from './pages/feedback/Comments';
+
 // Account
 import Profile from './pages/account/Profile';
 import ChangePassword from './pages/account/ChangePassword';
@@ -68,6 +78,16 @@ function App() {
           <Route path="management/users" element={<Users />} />
           <Route path="management/mechanics" element={<Mechanics />} />
           <Route path="management/workshops" element={<Workshops />} />
+
+          {/* Finance */}
+          <Route path="finance/payments" element={<Payments />} />
+
+          {/* Reports */}
+          <Route path="reports" element={<Reports />} />
+
+          {/* Feedback */}
+          <Route path="feedback/reviews" element={<Reviews />} />
+          <Route path="feedback/comments" element={<Comments />} />
 
           {/* Vehicles */}
           <Route path="vehicles/cars" element={<Cars />} />

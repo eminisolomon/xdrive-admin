@@ -13,6 +13,11 @@ import {
   CurrencyDollarIcon,
   BellIcon,
   ShieldCheckIcon,
+  BanknotesIcon,
+  ChartPieIcon,
+  ChatBubbleBottomCenterTextIcon,
+  ChatBubbleLeftRightIcon,
+  StarIcon,
 } from '@heroicons/react/24/outline';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -70,19 +75,51 @@ const SIDEBAR_ITEMS = [
     ],
   },
   {
-    label: 'Services',
+    label: 'Finance',
+    icon: <BanknotesIcon className="h-6 w-6" />,
+    children: [
+      {
+        label: 'Payments',
+        icon: <CurrencyDollarIcon className="h-5 w-5" />,
+        path: '/finance/payments',
+      },
+      {
+        label: 'Plans',
+        icon: <ReceiptPercentIcon className="h-5 w-5" />,
+        path: '/services/plans',
+      },
+      {
+        label: 'Subscriptions',
+        icon: <CurrencyDollarIcon className="h-5 w-5" />,
+        path: '/services/subscriptions',
+      },
+    ],
+  },
+  {
+    label: 'Services List',
     icon: <ReceiptPercentIcon className="h-6 w-6" />,
     path: '/services/list',
   },
   {
-    label: 'Subscriptions',
-    icon: <CurrencyDollarIcon className="h-6 w-6" />,
-    path: '/services/subscriptions',
+    label: 'Feedback',
+    icon: <ChatBubbleBottomCenterTextIcon className="h-6 w-6" />,
+    children: [
+      {
+        label: 'Reviews',
+        icon: <StarIcon className="h-5 w-5" />,
+        path: '/feedback/reviews',
+      },
+      {
+        label: 'Comments',
+        icon: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
+        path: '/feedback/comments',
+      },
+    ],
   },
   {
-    label: 'Plans',
-    icon: <CurrencyDollarIcon className="h-6 w-6" />,
-    path: '/services/plans',
+    label: 'Reports',
+    icon: <ChartPieIcon className="h-6 w-6" />,
+    path: '/reports',
   },
   {
     label: 'Settings',
