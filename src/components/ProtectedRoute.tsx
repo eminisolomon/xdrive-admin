@@ -13,11 +13,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const { admin, isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated || !admin) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/admin" replace />;
   }
 
   if (requiredRole && admin.role !== requiredRole) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/admin" replace />;
   }
 
   return <>{children}</>;

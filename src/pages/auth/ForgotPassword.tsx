@@ -27,7 +27,7 @@ const ForgotPassword = () => {
     <AuthLayout
       title="Forgot Password?"
       subtitle="Secure account recovery process"
-      backTo="/"
+      backTo="/admin"
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <Input
