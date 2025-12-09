@@ -14,6 +14,7 @@ import Users from './pages/management/Users';
 import Mechanics from './pages/management/Mechanics';
 import Workshops from './pages/management/Workshops';
 import Cars from './pages/vehicles/Cars';
+import CarDetails from './pages/vehicles/CarDetails';
 import Brands from './pages/vehicles/Brands';
 import Models from './pages/vehicles/Models';
 import BodyTypes from './pages/vehicles/BodyTypes';
@@ -91,6 +92,7 @@ function App() {
 
           {/* Vehicles */}
           <Route path="vehicles/cars" element={<Cars />} />
+          <Route path="vehicles/cars/:id" element={<CarDetails />} />
           <Route path="vehicles/brands" element={<Brands />} />
           <Route path="vehicles/models" element={<Models />} />
           <Route path="vehicles/body-types" element={<BodyTypes />} />

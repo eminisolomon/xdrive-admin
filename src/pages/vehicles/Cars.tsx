@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   BuildingStorefrontIcon,
   TrashIcon,
@@ -18,12 +18,14 @@ import {
   Input,
   DeleteCarModal,
   RejectCarModal,
+  FeatureCarModal,
 } from '@/components';
 import { Car } from '@/interfaces';
 import { formatCurrency } from '@/shared/formatters';
 import PageHeader from '@/components/PageHeader';
 
 const Cars = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page') || '1', 10);
   const statusParam = searchParams.get('status') || 'all';
@@ -36,6 +38,8 @@ const Cars = () => {
     rejectCar,
     featureCar,
     unfeatureCar,
+    featureCarPending,
+    unfeatureCarPending,
   } = useCars();
 
   const { data: carsData, isLoading: carsLoading } = useGetCars(
@@ -61,6 +65,14 @@ const Cars = () => {
   }>({
     isOpen: false,
     carId: null,
+  });
+
+  const [featureConfirmation, setFeatureConfirmation] = useState<{
+    isOpen: boolean;
+    car: Car | null;
+  }>({
+    isOpen: false,
+    car: null,
   });
 
   const handleSearch = (e: React.FormEvent) => {
@@ -105,13 +117,16 @@ const Cars = () => {
     }
   };
 
-  const handleToggleFeature = async (car: Car) => {
+  const handleToggleFeature = async () => {
+    const car = featureConfirmation.car;
+    if (!car) return;
     try {
       if (car.is_featured) {
         await unfeatureCar(car.id);
       } else {
         await featureCar(car.id);
       }
+      setFeatureConfirmation({ isOpen: false, car: null });
     } catch (error) {
       console.error('Failed to toggle feature status', error);
     }
@@ -235,7 +250,9 @@ const Cars = () => {
 
                 <div className="absolute top-3 right-3">
                   <button
-                    onClick={() => handleToggleFeature(car)}
+                    onClick={() =>
+                      setFeatureConfirmation({ isOpen: true, car })
+                    }
                     className={`p-2 rounded-full transition-all duration-200 shadow-sm backdrop-blur-md ${
                       car.is_featured
                         ? 'bg-yellow-400 text-white hover:bg-yellow-500'
@@ -317,6 +334,7 @@ const Cars = () => {
                     variant="outline"
                     size="sm"
                     className="justify-center text-(--color-body) hover:text-(--color-primary)"
+                    onClick={() => navigate(`/vehicles/cars/${car.id}`)}
                     icon={<EyeIcon className="h-4 w-4" />}
                   >
                     View
@@ -353,6 +371,14 @@ const Cars = () => {
         isOpen={rejectModal.isOpen}
         onClose={() => setRejectModal({ isOpen: false, carId: null })}
         onSubmit={handleReject}
+      />
+
+      <FeatureCarModal
+        isOpen={featureConfirmation.isOpen}
+        onClose={() => setFeatureConfirmation({ isOpen: false, car: null })}
+        onConfirm={handleToggleFeature}
+        car={featureConfirmation.car}
+        isLoading={featureCarPending || unfeatureCarPending}
       />
     </div>
   );
