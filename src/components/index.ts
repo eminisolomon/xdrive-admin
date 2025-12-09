@@ -14,3 +14,4 @@ export * from './BodyType';
 export * from './BodyType';
 export * from './Service';
 export * from './Subscription';
+export * from './User';

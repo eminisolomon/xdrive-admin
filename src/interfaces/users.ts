@@ -38,7 +38,16 @@ export interface User {
   state: string;
   address: string | null;
   profile_image: string | null;
+  profile_image_id: string | null;
   role: 'user' | 'mechanic' | 'workshop' | string;
+  email_notifications: boolean;
+  push_notifications: boolean;
+  sms_notifications: boolean;
+  marketing_emails: boolean;
+  language: string;
+  timezone: string;
+  status: 'active' | 'suspended' | 'inactive';
+  suspended_at: string | null;
   email_verified_at: string | null;
   created_at: string;
   updated_at: string;
