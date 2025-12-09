@@ -1,13 +1,42 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/xdrive.png';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-20 pb-10 border-t border-gray-800 font-sans">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mb-16">
-          {/* Column 1: Brand & Description - Full width on mobile/tablet, 1 col on desktop */}
-          <div className="col-span-2 lg:col-span-1 space-y-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mb-16"
+        >
+          {/* Column 1: Brand & Description */}
+          <motion.div
+            variants={itemVariants}
+            className="col-span-2 lg:col-span-1 space-y-6"
+          >
             <div className="flex items-center gap-3">
               <img
                 src={Logo}
@@ -81,10 +110,10 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 2: Company */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6 text-white">Company</h3>
             <ul className="space-y-4 text-gray-400 text-sm">
               <li>
@@ -112,10 +141,10 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 3: Legal */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6 text-white">Legal</h3>
             <ul className="space-y-4 text-gray-400 text-sm">
               <li>
@@ -135,10 +164,13 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 4: Contact Us */}
-          <div className="col-span-2 lg:col-span-1">
+          <motion.div
+            variants={itemVariants}
+            className="col-span-2 lg:col-span-1"
+          >
             <h3 className="text-lg font-bold mb-6 text-white">Contact Us</h3>
             <ul className="space-y-4 text-gray-400 text-sm">
               <li className="flex flex-col gap-1">
@@ -161,16 +193,16 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>
-            &copy; {new Date().getFullYear()} XDRIVE AUTOMOBILES LIMITED. RC
-            7538475. All rights reserved.
+            &copy; {new Date().getFullYear()} XDRIVE AUTOMOBILES LIMITED. All
+            rights reserved.
           </p>
           <div className="flex gap-6">
-            {/* Optional bottom links or badges */}
+            <span className="text-gray-500">RC 7538475</span>
           </div>
         </div>
       </div>

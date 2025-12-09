@@ -2,75 +2,110 @@ import {
   WrenchScrewdriverIcon,
   TruckIcon,
   AcademicCapIcon,
-  PuzzlePieceIcon,
-  CurrencyDollarIcon,
-  MapIcon,
+  ShoppingBagIcon,
+  ArrowPathIcon,
+  ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
 const features = [
   {
-    title: 'Automobile Services',
+    title: 'Buy & Sell Cars',
     description:
-      "Experience unparalleled 24/7 automobile services tailored to your needs. From purchasing your dream car and booking a convenient ride to swapping vehicles or accessing mobile mechanics - we've got you covered at every turn.",
-    icon: WrenchScrewdriverIcon,
+      'Seamlessly buy your dream car or sell your current vehicle. Our marketplace connects you with trusted buyers and sellers for effortless transactions.',
+    icon: ShoppingBagIcon,
     color: 'bg-blue-100 text-blue-600',
   },
   {
-    title: 'Emergency Assistance On-the-Go',
+    title: 'Workshop & Mechanic Appointments',
     description:
-      "No matter the situation, our emergency services ensure you're never left stranded. Whether it's roadside assistance, vehicle breakdowns, or immediate repair needs, our responsive team is ready to help you anytime, anywhere.",
+      'Book appointments with top-rated workshops and expert mechanics near you. Reliable repairs and maintenance are just a few clicks away.',
+    icon: WrenchScrewdriverIcon,
+    color: 'bg-orange-100 text-orange-600',
+  },
+  {
+    title: 'Emergency Assistance',
+    description:
+      "Stuck on the road? Our 24/7 emergency services ensure you're never stranded. From breakdowns to towing, help is always around the corner.",
     icon: TruckIcon,
     color: 'bg-red-100 text-red-600',
   },
   {
-    title: 'Ride Booking Made Easy',
+    title: 'Vehicle Swaps',
     description:
-      'Get from point A to point B effortlessly with our seamless ride-booking system. Choose from a variety of vehicles and enjoy a hassle-free travel experience at the tap of a button, whenever you need it.',
-    icon: MapIcon,
+      'Upgrade or change your ride easily. Our platform facilitates secure and fair vehicle swaps, helping you drive what matches your lifestyle.',
+    icon: ArrowPathIcon,
     color: 'bg-green-100 text-green-600',
   },
   {
-    title: 'Expert Driving School & Personalized Training',
+    title: 'Expert Driving School',
     description:
-      "Get the best of both worlds with personalized lessons and expert training. Our driving school helps you become a confident and safe driver, whether you're learning for the first time or brushing up on your skills.",
+      'Learn to drive with confidence. We offer personalized training from verified instructors to help you become a safe and skilled driver.',
     icon: AcademicCapIcon,
-    color: 'bg-orange-100 text-orange-600',
-  },
-  {
-    title: 'Interactive Online Games for Fun & Skill Building',
-    description:
-      'Stay entertained and sharpen your skills at the same time with our interactive online games. Designed to be fun and engaging, they offer you a chance to relax, compete with friends, and enhance your cognitive skills.',
-    icon: PuzzlePieceIcon,
     color: 'bg-purple-100 text-purple-600',
   },
   {
-    title: 'Seamless Car Buying & Selling Experience',
+    title: 'Car Inspection & Safety',
     description:
-      'Buying or selling a car has never been easier. Our platform connects you with trusted buyers and sellers, ensuring a safe and smooth transaction every time. Enjoy peace of mind with our verified listings.',
-    icon: CurrencyDollarIcon,
+      'Ensure peace of mind with our comprehensive car inspection services. We verify vehicle conditions so you can trade with absolute confidence.',
+    icon: ShieldCheckIcon,
     color: 'bg-indigo-100 text-indigo-600',
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
 const Features = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="features" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl lg:text-4xl font-bold text-(--color-primary) mb-4">
-            Some of the Best Features
+            Everything You Need
           </h2>
-          <p className="text-xl text-gray-600">You Find in One Application</p>
-        </div>
+          <p className="text-xl text-gray-600">
+            Powerful features designed for your automotive lifestyle.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+              variants={itemVariants}
+              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group"
             >
               <div
-                className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${feature.color}`}
+                className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${feature.color} group-hover:scale-110 transition-transform duration-300`}
               >
                 <feature.icon className="h-8 w-8" />
               </div>
@@ -80,9 +115,9 @@ const Features = () => {
               <p className="text-gray-600 leading-relaxed text-sm">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

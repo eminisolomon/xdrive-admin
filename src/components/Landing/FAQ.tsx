@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
 const faqs = [
   {
@@ -24,23 +25,55 @@ const faqs = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-3xl">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-3xl lg:text-4xl font-bold text-(--color-primary) mb-4">
             F.A.Q
           </h2>
           <p className="text-gray-600">Frequently Asked Questions</p>
-        </div>
+        </motion.div>
 
-        <div className="space-y-4">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="space-y-4"
+        >
           {faqs.map((faq, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
               className="border border-gray-200 rounded-2xl bg-gray-50 overflow-hidden"
             >
               <button
@@ -67,9 +100,9 @@ const FAQ = () => {
                   {faq.answer}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

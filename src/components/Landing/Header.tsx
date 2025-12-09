@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '@/assets/xdrive.png';
+import { motion } from 'framer-motion';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -8,6 +9,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [storeUrl, setStoreUrl] = useState('#download');
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,19 +38,46 @@ const Header = () => {
     setStoreUrl(getStoreUrl());
   }, []);
 
-  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (storeUrl === '#download') {
-      e.preventDefault();
-      const element = document.getElementById('download');
+  const handleScrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string,
+  ) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    if (location.pathname === '/') {
+      const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // Navigate to home and then scroll (using hash)
+      navigate(`/#${id}`);
+      // Note: A separate effect in Home page might be needed to handle hash scrolling on load,
+      // but standard browser behavior often handles it if we navigate to hash.
+      // Alternatively, we can rely on standard <a href="/#id"> but manual handling allows smooth scroll on same page.
+      // For this implementation, let's try pushing hash. Usually simpler.
+      // Actually, standard behavior:
     }
-    setMobileMenuOpen(false);
+  };
+
+  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (storeUrl === '#download') {
+      handleScrollToSection(e, 'download');
+    } else {
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleFeaturesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    handleScrollToSection(e, 'features');
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-(--color-primary)/95 backdrop-blur-md shadow-md py-4'
@@ -78,14 +108,9 @@ const Header = () => {
               About
             </Link>
             <a
-              href="#"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-            >
-              Services
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              href="#features"
+              onClick={handleFeaturesClick}
+              className="text-gray-300 hover:text-white transition-colors text-sm font-medium cursor-pointer"
             >
               Features
             </a>
@@ -129,16 +154,9 @@ const Header = () => {
               About
             </Link>
             <a
-              href="#"
+              href="#features"
+              onClick={handleFeaturesClick}
               className="text-gray-300 hover:text-white py-2 border-b border-white/5"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Services
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white py-2 border-b border-white/5"
-              onClick={() => setMobileMenuOpen(false)}
             >
               Features
             </a>
@@ -152,7 +170,7 @@ const Header = () => {
           </div>
         )}
       </div>
-    </header>
+    </motion.header>
   );
 };
 
