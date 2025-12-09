@@ -7,6 +7,27 @@ import {
 } from '@/interfaces';
 
 export const carService = {
+  getAll: async (
+    page = 1,
+    status?: string,
+    search?: string,
+  ): Promise<GetCarsResponse> => {
+    try {
+      const params = new URLSearchParams({
+        page: page.toString(),
+      });
+      if (status) params.append('status', status);
+      if (search) params.append('search', search);
+
+      const response = await api.get<GetCarsResponse>(
+        `/admin/cars?${params.toString()}`,
+      );
+      return response.data;
+    } catch (error) {
+      throw handleApiError(error);
+    }
+  },
+
   getPending: async (): Promise<GetCarsResponse> => {
     try {
       const response = await api.get<GetCarsResponse>('/admin/cars/pending');

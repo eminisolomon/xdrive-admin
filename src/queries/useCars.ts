@@ -7,6 +7,13 @@ export const useCars = () => {
   const queryClient = useQueryClient();
 
   // Queries
+  const useGetCars = (page = 1, status?: string, search?: string) => {
+    return useQuery({
+      queryKey: ['cars', page, status, search],
+      queryFn: () => carService.getAll(page, status, search),
+    });
+  };
+
   const useGetPendingCars = () => {
     return useQuery({
       queryKey: ['cars', 'pending'],
@@ -35,9 +42,8 @@ export const useCars = () => {
       carService.update(id, data),
     onSuccess: (_, variables) => {
       toast.success('Car updated successfully');
+      queryClient.invalidateQueries({ queryKey: ['cars'] });
       queryClient.invalidateQueries({ queryKey: ['cars', variables.id] });
-      queryClient.invalidateQueries({ queryKey: ['cars', 'pending'] });
-      queryClient.invalidateQueries({ queryKey: ['cars', 'flagged'] });
     },
     onError: (error: any) => {
       toast.error(error.message || 'Failed to update car');
@@ -103,6 +109,7 @@ export const useCars = () => {
   });
 
   return {
+    useGetCars,
     useGetPendingCars,
     useGetFlaggedCars,
     useGetCar,
