@@ -25,20 +25,27 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       </Helmet>
 
       <motion.div
-        className="mb-12 pt-8"
+        className="mb-6 pt-4 md:mb-10 md:pt-8"
         variants={staggerContainerFast}
         initial="hidden"
         animate="visible"
       >
         <motion.h1
-          className="text-4xl md:text-5xl font-extrabold text-(--color-text) flex items-center gap-4 mb-3"
+          className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-(--color-text) flex items-center gap-2 md:gap-4 mb-2 md:mb-3"
           variants={fadeInUp}
         >
-          {icon && <span className="text-(--color-primary)">{icon}</span>}
+          {icon && (
+            <span className="text-(--color-primary) [&>svg]:w-8 [&>svg]:h-8 md:[&>svg]:w-12 md:[&>svg]:h-12">
+              {icon}
+            </span>
+          )}
           {title}
         </motion.h1>
         {description && (
-          <motion.p className="text-lg text-(--color-body)" variants={fadeInUp}>
+          <motion.p
+            className="text-sm md:text-lg text-(--color-body)"
+            variants={fadeInUp}
+          >
             {description}
           </motion.p>
         )}

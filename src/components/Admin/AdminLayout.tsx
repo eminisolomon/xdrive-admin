@@ -11,7 +11,7 @@ const AdminLayout = () => {
       <AdminHeader onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
       <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <main className="flex-1 pt-16 md:ml-[280px] px-4 py-6 sm:px-6 md:px-8 lg:px-12">
+      <main className="flex-1 pt-16 md:ml-[280px] w-full min-w-0 overflow-x-hidden px-4 py-6 sm:px-6 md:px-8 lg:px-12">
         <Outlet />
       </main>
 

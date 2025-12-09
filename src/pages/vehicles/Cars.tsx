@@ -195,12 +195,12 @@ const Cars = () => {
           </div>
 
           <form onSubmit={handleSearch} className="flex gap-2 w-full md:w-auto">
-            <div className="w-full md:w-64">
+            <div className="flex-1 md:w-64 md:flex-none">
               <Input
                 placeholder="Search cars..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="h-10"
+                className="h-10 w-full"
               />
             </div>
             <Button
