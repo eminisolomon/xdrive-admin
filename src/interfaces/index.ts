@@ -8,6 +8,7 @@ export * from './body-type';
 export * from './cars';
 export * from './mechanic';
 export * from './workshop';
+export * from './settings';
 export * from './service';
 export * from './comment';
 export * from './review';

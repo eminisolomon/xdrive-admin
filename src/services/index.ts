@@ -6,6 +6,7 @@ export * from './body-type.service';
 export * from './cars.service';
 export * from './mechanic.service';
 export * from './workshop.service';
+export * from './settings.service';
 export * from './service.service';
 export * from './comment.service';
 export * from './review.service';

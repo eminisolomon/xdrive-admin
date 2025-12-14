@@ -6,6 +6,7 @@ export * from './useBodyType';
 export * from './useCars';
 export * from './useMechanics';
 export * from './useWorkshops';
+export * from './useSettings';
 export * from './useServices';
 export * from './useComments';
 export * from './useReviews';

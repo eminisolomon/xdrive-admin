@@ -19,3 +19,4 @@ export * from './Subscription';
 export * from './User';
 export * from './Car';
 export * from './Notification';
+export { default as Toggle } from './Toggle';
