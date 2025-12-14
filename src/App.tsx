@@ -55,10 +55,6 @@ import Partners from './pages/landing/Partners';
 import Terms from './pages/landing/Terms';
 import Privacy from './pages/landing/Privacy';
 
-// ... other imports
-
-import { Toaster } from 'sonner';
-
 function App() {
   const location = useLocation();
 
@@ -68,7 +64,6 @@ function App() {
 
   return (
     <>
-      <Toaster richColors position="top-right" />
       <ScrollToTop />
       <Routes>
         {/* Landing Routes */}
